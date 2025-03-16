@@ -1,0 +1,1 @@
+export { default as RenderWithTheme } from './RenderWithTheme'
