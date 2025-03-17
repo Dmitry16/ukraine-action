@@ -13,7 +13,7 @@ import { Field } from "formik"
 import { Stack, Typography, useTheme } from "@mui/material"
 
 import AuthService from "../services/AuthService"
-import { Card, CardBody, CardHeader, Button, Input, Logo } from "../../lib/partials/index"
+import { Card, CardBody, CardHeader, Button, Input, Logo } from "../../lib/partials"
 import { BUTTON_SIZE, BUTTON_TYPE, INPUT_SIZE } from "../../lib/enums/partials.enum"
 import { LOGIN } from "../../lib/constants/auth"
 import Form from "../../lib/components/Form"

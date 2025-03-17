@@ -25,7 +25,7 @@ const loadFirebaseConfig = async () => {
 		measurementId: env?.VITE_FIREBASE_MEASUREMENT_ID || localConfig?.measurementId || "$FIREBASE_MEASUREMENT_ID",
 	  }
 	}
-  }
+}
   
-  export default loadFirebaseConfig
+export default loadFirebaseConfig
   

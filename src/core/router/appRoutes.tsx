@@ -1,14 +1,15 @@
 import { Routes, Route } from "react-router"
 
 import LoginPage from "../pages/LoginPage"
-import AuthPage from "../pages/AuthPage"
+import HomePage from "../pages/HomePage"
 
 export function AppRoutes() {
   return (
       <Routes>
-        <Route element={<AuthPage />}>
-          <Route path="/" element={<LoginPage />} />
-        </Route>
+        {/* <Route element={<AuthPage />}> */}
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/" element={<HomePage />} />
+        {/* </Route> */}
       </Routes>
   )
 }
