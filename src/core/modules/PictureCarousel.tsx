@@ -1,7 +1,8 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Card, CardBody, CardFooter } from "@/lib/partials"
-import { Button } from "@/lib/partials"
-import { ChevronLeft, ChevronRight } from "lucide-react"
+import { IconButton } from "@mui/material"
+import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew'
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos'
 import { useSwipeable } from "react-swipeable"
 import { motion } from "framer-motion"
 
@@ -17,42 +18,46 @@ export default function PictureCarousel({ images }: PictureCarouselProps) {
 
   const handlers = useSwipeable({
     onSwipedLeft: nextImage,
-    onSwipedRight: prevImage
+    onSwipedRight: prevImage,
+    trackMouse: true
   })
 
+  useEffect(() => {
+    const interval = setInterval(() => {
+      nextImage()
+    }, 4000)
+
+    return () => clearInterval(interval)
+  }, [index])
+
   return (
-    <>
-      <Card sx={{ height: "auto", width: "700px", borderRadius: "10px" }}>
-        <CardBody sx={{ height: "auto", width: "700px", borderRadius: "10px" }}>
-          <motion.img
-            key={index}
-            src={images[index]}
-            alt="carousel image"
-            className="w-[300px] h-[200px] object-cover rounded-xl"
-            {...handlers}
-            initial={{ opacity: 0, x: 50 }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: -50 }}
-            transition={{ duration: 0.4 }}
-          />
-        </CardBody>
-        <CardFooter>
-          <Button
-            variant="text"
-            onClick={prevImage}
-            label="Previous"
-          >
-            <ChevronLeft size={14} />
-          </Button>
-          <Button
-            variant="text"
-            onClick={nextImage}
-            label="Next"
-          >
-            <ChevronRight size={14} />
-          </Button>
-        </CardFooter>
-      </Card>
-    </>
+    <Card sx={{ borderRadius: "10px" }}>
+      <CardBody
+        style={{
+          height: "500px", width: "auto",
+          display: 'flex',
+        }}
+        {...handlers}
+      >
+        <motion.img
+          key={index}
+          src={images[index]}
+          style={{ width: "100%", height: "98%", objectFit: "cover" }}
+          alt="carousel image"
+          initial={{ opacity: 0, x: 50 }}
+          animate={{ opacity: 1, x: 0 }}
+          exit={{ opacity: 0, x: -50 }}
+          transition={{ duration: 0.4 }}
+        />
+      </CardBody>
+      <CardFooter sx={{ display: 'flex', justifyContent: 'space-between' }}>
+        <IconButton onClick={prevImage} aria-label="Previous">
+          <ArrowBackIosNewIcon fontSize="small" />
+        </IconButton>
+        <IconButton onClick={nextImage} aria-label="Next">
+          <ArrowForwardIosIcon fontSize="small" />
+        </IconButton>
+      </CardFooter>
+    </Card>
   )
 }
