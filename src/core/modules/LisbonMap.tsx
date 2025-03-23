@@ -3,7 +3,7 @@ import mapboxgl from "mapbox-gl"
 
 const MAPBOX_ACCESS_TOKEN = import.meta.env.VITE_MAPBOX_ACCESS_TOKEN
 
-const LisbonMap: React.FC = () => {
+const LisbonMap: React.FC<{ image: string }> = ({ image }) => {
   const mapContainerRef = useRef<HTMLDivElement | null>(null)
   const mapRef = useRef<mapboxgl.Map | null>(null)
 
@@ -15,26 +15,45 @@ const LisbonMap: React.FC = () => {
     const map = new mapboxgl.Map({
       container: mapContainerRef.current,
       style: "mapbox://styles/mapbox/satellite-streets-v11",
-      center: [-9.1427, 38.7369], // Lisbon center
-      zoom: 12, // Initial zoom level
-    })
-
-    map.on("load", () => {
-      setTimeout(() => {
-        map.flyTo({
-          center: [-9.1399, 38.7146], // Praça do Rossio, Lisbon
-          zoom: 17, // Closer zoom
-          speed: 1.4, // Animation speed
-          curve: 1, // Animation curve factor
-          essential: true,
-        })
-      }, 2000) // Delay before zooming in
+      center: [-9.1427, 38.7369],
+      zoom: 12
     })
 
     mapRef.current = map
 
     return () => map.remove()
   }, [])
+
+  useEffect(() => {
+    const map = mapRef.current
+    if (!map) return
+
+    if (image.includes("rossio")) {
+      map.flyTo({
+        center: [-9.1399, 38.7146],
+        zoom: 17,
+        speed: 1.4,
+        curve: 1,
+        essential: true
+      })
+    } else if (image.includes("sunset")) {
+      map.flyTo({
+        center: [-9.2416, 38.6296], // Caparica
+        zoom: 14,
+        speed: 1.4,
+        curve: 1,
+        essential: true
+      })
+    } else {
+      map.flyTo({
+        center: [-9.1427, 38.7369], // Lisbon
+        zoom: 12,
+        speed: 1.4,
+        curve: 1,
+        essential: true
+      })
+    }
+  }, [image])
 
   return (
     <div

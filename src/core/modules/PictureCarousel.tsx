@@ -1,20 +1,30 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { Card, CardBody, CardFooter } from "@/lib/partials"
 import { IconButton } from "@mui/material"
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew'
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos'
+import PlayArrowIcon from '@mui/icons-material/PlayArrow'
+import StopIcon from '@mui/icons-material/Stop'
 import { useSwipeable } from "react-swipeable"
 import { motion } from "framer-motion"
 
 type PictureCarouselProps = {
   images: string[]
+  onImageChange?: (src: string) => void
 }
 
-export default function PictureCarousel({ images }: PictureCarouselProps) {
+export default function PictureCarousel({ images, onImageChange }: PictureCarouselProps) {
   const [index, setIndex] = useState(0)
+  const [autoPlay, setAutoPlay] = useState(true)
+  const intervalRef = useRef<NodeJS.Timeout | null>(null)
 
-  const prevImage = () => setIndex((prev) => (prev === 0 ? images.length - 1 : prev - 1))
-  const nextImage = () => setIndex((prev) => (prev === images.length - 1 ? 0 : prev + 1))
+  const updateIndex = (newIndex: number) => {
+    setIndex(newIndex)
+    onImageChange?.(images[newIndex])
+  }
+
+  const prevImage = () => updateIndex(index === 0 ? images.length - 1 : index - 1)
+  const nextImage = () => updateIndex(index === images.length - 1 ? 0 : index + 1)
 
   const handlers = useSwipeable({
     onSwipedLeft: nextImage,
@@ -23,12 +33,18 @@ export default function PictureCarousel({ images }: PictureCarouselProps) {
   })
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      nextImage()
-    }, 4000)
+    if (autoPlay) {
+      intervalRef.current = setInterval(() => {
+        nextImage()
+      }, 4000)
+    } else if (intervalRef.current) {
+      clearInterval(intervalRef.current)
+    }
 
-    return () => clearInterval(interval)
-  }, [index])
+    return () => {
+      if (intervalRef.current) clearInterval(intervalRef.current)
+    }
+  }, [autoPlay, index])
 
   return (
     <Card sx={{ borderRadius: "10px" }}>
@@ -53,6 +69,12 @@ export default function PictureCarousel({ images }: PictureCarouselProps) {
       <CardFooter sx={{ display: 'flex', justifyContent: 'space-between' }}>
         <IconButton onClick={prevImage} aria-label="Previous">
           <ArrowBackIosNewIcon fontSize="small" />
+        </IconButton>
+        <IconButton onClick={() => setAutoPlay(true)} aria-label="Play">
+          <PlayArrowIcon fontSize="small" />
+        </IconButton>
+        <IconButton onClick={() => setAutoPlay(false)} aria-label="Stop">
+          <StopIcon fontSize="small" />
         </IconButton>
         <IconButton onClick={nextImage} aria-label="Next">
           <ArrowForwardIosIcon fontSize="small" />
