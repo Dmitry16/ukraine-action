@@ -6,6 +6,7 @@ import HeaderToolbarFeature from "@/lib/features/header/toolbar/HeaderToolbarFea
 import TopRowInfoFeature from "@/lib/features/body/TopRowInfoFeature"
 import LisbonMap from "../modules/LisbonMap"
 import PictureCarousel from "../modules/PictureCarousel"
+import ActionInfo from "../modules/ActionInfo"
 
 const DEFAULT_PICS = [
   "public/pictures/rossio.JPG",
@@ -26,15 +27,18 @@ const HomePage: FC = () => {
       <HeaderToolbarFeature />
 
       <Box sx={{ display: "flex", flexDirection: "row", justifyContent: "center", alignItems: "center", width: "100%", height: "100px" }}>
-        <Typography variant="h4">Ukraine in Action</Typography>
+        <Typography variant="h4">Action for Ukraine</Typography>
       </Box>
       <TopRowInfoFeature />
       <Grid container spacing={2} flexDirection={"row"}>
-        <Grid size={6}>
+        <Grid size={4}>
           <PictureCarousel images={pics} onImageChange={handleImageChange} />
         </Grid>
-        <Grid size={6}>
+        <Grid size={4}>
           <LisbonMap image={image} />
+        </Grid>
+        <Grid size={4}>
+          <ActionInfo image={image} />
         </Grid>
       </Grid>
     </Grid>
