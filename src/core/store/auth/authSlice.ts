@@ -26,11 +26,12 @@ export const authSlice = createSlice({
   reducers: {
     appSignIn: (state, action) => {
       // console.log("authSlice:::appSignIn:::", action)
+
       state.email = action.payload.email
       state.password = action.payload.password
     },
     login: (state, action: PayloadAction<{ authToken: string }>) => {
-      console.log("authSlice:::appSignIn:::", action)
+      // console.log("authSlice:::login:::", action)
 
       state.authToken = action.payload.authToken
       state.user = undefined
@@ -44,7 +45,7 @@ export const authSlice = createSlice({
     logout: () => initialState,
 
     userLoaded: (state, action: PayloadAction<any>) => {
-      console.log("authSlice:::userLoaded", action.payload)
+      // console.log("authSlice:::userLoaded", action.payload)
 
       state.user = action.payload
     },

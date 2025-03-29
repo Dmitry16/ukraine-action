@@ -11,14 +11,14 @@ export function* loginSaga(action: any) {
   // const { setSnackBarOpen, setLoading, setCustomerSelection, dispatch } = action.payload
   try {
       // setLoading(true)
-      console.log("loginSaga:::action:::", action)
+      // console.log("loginSaga:::action:::", action)
 
       // authLogin(action.payload.email, action.payload.password, action.payload.tenantID)
       yield authLogin(action.payload.email, action.payload.password)
         .then((response: any) => {
           // setLoading(false)
 
-          console.log("loginSaga:::response:::", response)
+          // console.log("loginSaga:::response:::", response)
   
           if (!response) {
             console.error("Login failed: No response received")

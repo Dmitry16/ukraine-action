@@ -1,4 +1,5 @@
 import { initializeApp } from "firebase/app"
+import { getAnalytics } from "firebase/analytics"
 import {
   doc,
   getDoc,
@@ -31,6 +32,8 @@ const config = await loadFirebaseConfig()
 // console.log("Firebase config:::", config)
 
 export const firebaseApp: FirebaseApp = initializeApp(config.firebaseConfig)
+
+export const analytics = getAnalytics(firebaseApp)
 
 export const auth = getAuth(firebaseApp)
 

@@ -18,7 +18,7 @@ import { BUTTON_SIZE, BUTTON_TYPE, INPUT_SIZE } from "../../lib/enums/partials.e
 import { LOGIN } from "../../lib/constants/auth"
 import Form from "../../lib/components/Form"
 
-import { useAppContext } from "../context/AppContext"
+// import { useAppContext } from "../context/AppContext"
 // import { RootState } from "../store" // Ensure this is your Redux state type
 
 const validationSchema = Yup.object().shape({
@@ -37,38 +37,38 @@ function isMultiTenantResult(response: any): response is MultiTenantResult {
   return response && typeof response === "object" && "multipleTenants" in response
 }
 
-const USE_LOGIN = import.meta.env.VITE_USE_LOGIN === "true"
+// const USE_LOGIN = import.meta.env.VITE_USE_LOGIN === "true"
 
 const LoginPage = () => {
   const theme = useTheme()
   const dispatch = useDispatch()
-  const { loadVertical } = useAppContext()
+  // const { loadVertical } = useAppContext()
 
-  const isLoggedin = USE_LOGIN ? useSelector((state: any) => state.auth?.user?.isLoggedin) : true
+  // const isLoggedin = USE_LOGIN ? useSelector((state: any) => state.auth?.user?.isLoggedin) : true
 
-  const { vertical } = useSelector((state: any) => {
-    return {
-        vertical: state.app?.vertical
-    }
-  }, shallowEqual)
+  // const { vertical } = useSelector((state: any) => {
+  //   return {
+  //       vertical: state.app?.vertical
+  //   }
+  // }, shallowEqual)
 
   const [loading, setLoading] = useState(false)
   const [snackBarOpen, setSnackBarOpen] = useState(false)
   const [customerSelection, setCustomerSelection] = useState<TenantResult[] | undefined>(undefined)
   const [passwordIsVisible, setPasswordIsVisible] = useState(false)
 
-  useEffect(() => {
-    if (!isLoggedin) return
+  // useEffect(() => {
+  //   if (!isLoggedin) return
 
-    if (!vertical) {
-      const assignedVertical = AuthService.getCustomerVertical()
-      // loads vertical and adds it to the app context
-      loadVertical(assignedVertical)
+  //   if (!vertical) {
+  //     const assignedVertical = AuthService.getCustomerVertical()
+  //     // loads vertical and adds it to the app context
+  //     loadVertical(assignedVertical)
 
-      assignedVertical && dispatch(setVertical({ vertical: assignedVertical }))
-    }
+  //     assignedVertical && dispatch(setVertical({ vertical: assignedVertical }))
+  //   }
 
-  }, [isLoggedin, vertical, loadVertical])
+  // }, [isLoggedin, vertical, loadVertical])
 
   return (
     <Card sx={{ width: "512px", padding: "0 61px 60px", margin: "20px 0" }}>
