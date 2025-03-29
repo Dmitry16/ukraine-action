@@ -39,10 +39,10 @@ const AuthPage = () => {
                     justifyContent: "center",
                     alignItems: "center",
                     minHeight: "100vh",
-                    background: `
-                        url(/src/lib/assets/bg/authbg.svg) 100% / 80% no-repeat,
-                        linear-gradient(270deg, #0A1B3D 0%, #0A1B3D 38.02%, #1065EF 100%)
-                    `,
+                    // background: `
+                    //     url(/src/lib/assets/bg/authbg.svg) 100% / 80% no-repeat,
+                    //     linear-gradient(270deg, #0A1B3D 0%, #0A1B3D 38.02%, #1065EF 100%)
+                    // `,
                     }}
                 >
                 
