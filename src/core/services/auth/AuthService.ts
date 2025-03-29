@@ -240,3 +240,13 @@ async function getTenantID(email: string, _tenantID: string | null = null): Prom
 
   return tenantID === "superAdmin" ? null : tenantID
 }
+
+type Vertical = "construction" | "healthcare" | "education"
+
+const verticals: Vertical[] = ["construction", "healthcare", "education"]
+
+// temporary solution. This should be fetched from the API
+export function getCustomerVertical(): Vertical | null {
+    // return null
+    return verticals[2]
+}

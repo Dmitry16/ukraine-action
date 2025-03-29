@@ -5,34 +5,35 @@ import { useSelector, shallowEqual } from "react-redux"
 import { Box } from "@mui/material"
 import { COMMON } from "../../lib/constants/common"
 import { useAppContext } from "../context/AppContext"
+import BasePage from "./BasePage"
 
 const USE_LOGIN = import.meta.env.VITE_USE_LOGIN === "true"
 
 const AuthPage = () => {
-    const { loadVertical, VerticalApp } = useAppContext()
+    // const { loadVertical, VerticalApp } = useAppContext()
 
     const isLoggedin = USE_LOGIN ? useSelector((state: any) => state.auth?.user?.isLoggedin) : true
 
-    const { vertical } = useSelector((state: any) => {
-        return {
-            vertical: state.app?.vertical
-        }
-    }, shallowEqual)
+    // const { vertical } = useSelector((state: any) => {
+    //     return {
+    //         vertical: state.app?.vertical
+    //     }
+    // }, shallowEqual)
 
-    const lastLoadedVertical = useRef<string | null>(null)
+    // const lastLoadedVertical = useRef<string | null>(null)
 
-    useEffect(() => {
-        if (!isLoggedin || !vertical) return
-        if (lastLoadedVertical.current === vertical) return
+    // useEffect(() => {
+    //     if (!isLoggedin || !vertical) return
+    //     if (lastLoadedVertical.current === vertical) return
     
-        loadVertical(vertical)
-        lastLoadedVertical.current = vertical
+    //     loadVertical(vertical)
+    //     lastLoadedVertical.current = vertical
     
-    }, [isLoggedin, loadVertical, vertical])
+    // }, [isLoggedin, loadVertical, vertical])
 
     return (
         <Suspense fallback={<p>Loading Vertical...</p>}>
-            {isLoggedin && VerticalApp ? <VerticalApp /> :
+            {isLoggedin ? <BasePage /> :
                 <Box
                     sx={{
                     display: "flex",

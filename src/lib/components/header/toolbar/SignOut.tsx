@@ -15,21 +15,26 @@ const SignOut = ({ onClick, sx, label, buttontype, buttonsize, ...props }: Custo
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
-  const auth = useSelector((state: any) => state.auth)
+  const isLoggedin = useSelector((state: any) => state.auth?.user?.isLoggedin)
 
   // const [isLoggedin, setIsLoggedin] = useState(auth?.user?.isLoggedin)
   // const [labelText, setLabelText] = useState(label || SIGN_OUT)
 
-  console.log("SignOut:::user:::", auth)
+  // console.log("SignOut:::isLoggedin:::", isLoggedin)
 
   const handleClick = () => {
-      console.log("Signing out...")
-      auth?.user?.isLoggedin ? dispatch(logout()) : navigate('/login')
+    console.log("Signing out...")
+    if (isLoggedin) {
+      navigate('/')
+      dispatch(logout())
+    } else {
+      navigate('/login')
+    }
   }
 
   return (
     <Button
-      label={auth?.user?.isLoggedin ? SIGN_OUT : SIGN_IN}
+      label={isLoggedin ? SIGN_OUT : SIGN_IN}
       buttontype={buttontype || BUTTON_TYPE.TERTIARY}
       buttonsize={buttonsize || BUTTON_SIZE.SMALL}
       sx={{ height: "31px", width: "94px", ...sx }}
