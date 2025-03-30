@@ -1,6 +1,7 @@
 import { Stack, Typography } from "@mui/material"
 
-import { useSelector } from "react-redux"
+import { useSelector, shallowEqual } from "react-redux"
+import { RootState } from "@/core/store"
 
 import { useConfig } from "@/core/config/hooks/useConfig"
 import { useWidgets } from "@/core/ui/hooks/useWidgets"
@@ -9,9 +10,12 @@ import { Card } from "../../partials"
 
 const TopRowInfoFeature = () => {
   const vertical = useSelector((state: any) => state.app.vertical)
-  const verticalConfig = useConfig(vertical)
+  const space = useSelector((state: RootState) => state.ui?.space, shallowEqual)
+  // const space = {}
 
-  const topRowInfoFeatureConfig = verticalConfig?.dashboard?.body?.topRowInfoFeature || []
+  const config = space?.layout ? space.layout : useConfig(vertical)
+
+  const topRowInfoFeatureConfig = config?.dashboard?.body?.topRowInfoFeature || []
 
   if (!topRowInfoFeatureConfig) return <Card sx={{ p: 2, m: 2, width: "100%" }}>Feature not found</Card>
 

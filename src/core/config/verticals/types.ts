@@ -1,18 +1,20 @@
 export type Vertical = "construction" | "healthcare" | "education"
 
-export type Component = {
-    id: string
-    name: string
-}
+import { Feature } from "@/core/types/uiTypes"
 
-export type Widget = {
-    id: string
-    widget?: string
-    isEnabled?: boolean
-    components?: Component[]
-}
+// export type Component = {
+//     id: string
+//     name: string
+// }
 
-export type Feature = Record<string, Widget>
+// export type Widget = {
+//     id: string
+//     widget?: string
+//     isEnabled?: boolean
+//     components?: Component[]
+// }
+
+// export type Feature = Record<string, Widget>
 
 export type Pages = "dashboard" | "reporting" | "auditTool" | "communication" | "admin" | "operations"
 
