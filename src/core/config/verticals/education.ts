@@ -10,12 +10,12 @@ export const education = {
         body: {
             ...defaultConfig.dashboard.body,
             topRowInfoFeature: {
-                SensorWidget1: { id: "widget6", widget: "SensorWidget1", isEnabled: true, components: [] },
-                SensorWidget2: { id: "widget4", widget: "SensorWidget2", isEnabled: true, components: [] },
-                SensorWidget3: { id: "widget5", widget: "SensorWidget3", isEnabled: true, components: [] },
+                SensorWidget1: { id: "widget1", widget: "SensorWidget1", isEnabled: true, components: [] },
+                SensorWidget2: { id: "widget2", widget: "SensorWidget2", isEnabled: true, components: [] },
+                SensorWidget3: { id: "widget3", widget: "SensorWidget3", isEnabled: true, components: [] },
                 SensorWidget4: { id: "widget4", widget: "SensorWidget4", isEnabled: true, components: [] },
                 SensorWidget5: { id: "widget5", widget: "SensorWidget5", isEnabled: true, components: [] },
-                SensorWidget6: { id: "widget6", widget: "SensorWidget5", isEnabled: true, components: [] }
+                SensorWidget6: { id: "widget6", widget: "SensorWidget6", isEnabled: true, components: [] }
             }
         }
     }

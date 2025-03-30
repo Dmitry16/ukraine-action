@@ -41,6 +41,7 @@ export type Widget = CustomisableProps & {
     icon?: string
     dashboards?: Dashboard[]
     widgets?: Widget[]
+    widgetOrder?: string[]
     components?: Component[]
     [key: string]: any
   }
