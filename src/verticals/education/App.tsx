@@ -9,7 +9,6 @@ import { Layout } from "@/core/types/uiTypes"
 import { actions } from "@/core/store/ui/uiSlice"
 
 import Dashboard from "./pages/DashboardPage"
-import { isNull } from "node:util"
 
 const EducationApp = () => {
   const space = useSelector((state: RootState) => state.ui?.space, shallowEqual)
