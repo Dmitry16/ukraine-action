@@ -21,6 +21,12 @@ export const uiSlice = createSlice({
     setSpace: (state, action: PayloadAction<{ space: Space }>) => {
         state.space = action.payload.space
     },
+    setLayoutCustom: (state) => {
+        if (!state.space || !state.space?.layout) return
+        console.log("uiSlice:::setLayoutCustom:::")
+
+        state.space.layout.isCustom = true
+    },
     setLayout: (state, action: PayloadAction<{ layout: Layout }>) => {
         if (!state.space) return
         console.log("uiSlice:::setLayout:::action.payload.layout:::", action.payload.layout)

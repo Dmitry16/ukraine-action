@@ -70,6 +70,7 @@ export type Layout = CustomisableProps & {
     config?: any
     isDefault?: boolean
     isCustomisable?: boolean
+    isCustom?: boolean
     features?: Feature[]
     [key: string]: any
 }
