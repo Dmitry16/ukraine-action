@@ -71,6 +71,7 @@ export type Layout = CustomisableProps & {
     isDefault?: boolean
     isCustomisable?: boolean
     isCustom?: boolean
+    isCustomStarted?: boolean
     features?: Feature[]
     [key: string]: any
 }

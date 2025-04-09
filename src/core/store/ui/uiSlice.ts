@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 
 import { Space, Layout, Feature, Widget, Component } from "../../types/uiTypes"
+import { start } from "repl"
 
 export interface UiState {
     vertical?: string
@@ -21,11 +22,17 @@ export const uiSlice = createSlice({
     setSpace: (state, action: PayloadAction<{ space: Space }>) => {
         state.space = action.payload.space
     },
-    setLayoutCustom: (state) => {
+    setIsCustom: (state) => {
         if (!state.space || !state.space?.layout) return
         console.log("uiSlice:::setLayoutCustom:::")
 
         state.space.layout.isCustom = true
+    },
+    startCustomization: (state, action: PayloadAction<boolean>) => {
+        if (!state.space || !state.space?.layout) return
+        console.log("uiSlice:::startCustomization:::")
+
+        state.space.layout.isCustomStarted = action.payload
     },
     setLayout: (state, action: PayloadAction<{ layout: Layout }>) => {
         if (!state.space) return
