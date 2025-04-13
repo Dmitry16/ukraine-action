@@ -11,7 +11,7 @@ const Dashboard = () => {
       <HeaderFeature />
 
       <Box sx={{ display: "flex", flexDirection: "row", justifyContent: "center", alignItems: "center", width: "100%", height: "100px" }}>
-        <Typography variant="H4">Education Dashboard</Typography>
+        <Typography variant="H4">Dashboard</Typography>
       </Box>
 
       <TopRowInfoFeature />

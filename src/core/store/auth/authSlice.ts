@@ -45,7 +45,7 @@ export const authSlice = createSlice({
     logout: () => initialState,
 
     userLoaded: (state, action: PayloadAction<any>) => {
-      // console.log("authSlice:::userLoaded", action.payload)
+      console.log("authSlice:::userLoaded", action.payload)
 
       state.user = action.payload
     },

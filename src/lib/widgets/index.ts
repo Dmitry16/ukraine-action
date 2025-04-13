@@ -15,7 +15,7 @@ import SensorWidget5 from "./SensorWidget5"
 import SensorWidget6 from "./SensorWidget6"
 import ToolbarLeftWidget from "./toolbar/ToolbarLeftWidget"
 import ToolbarRightWidget from "./toolbar/ToolbarRightWidget"
-
+import UserInfoWidget from "./user-info/UserInfoWidget"
 
 export default {
     GeneralAttendanceTableWidget,
@@ -35,4 +35,5 @@ export default {
     Widget6,
     ToolbarLeftWidget,
     ToolbarRightWidget,
+    UserInfoWidget,
 }

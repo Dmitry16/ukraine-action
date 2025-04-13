@@ -10,26 +10,7 @@ import BasePage from "./BasePage"
 const USE_LOGIN = import.meta.env.VITE_USE_LOGIN === "true"
 
 const AuthPage = () => {
-    // const { loadVertical, VerticalApp } = useAppContext()
-
     const isLoggedin = USE_LOGIN ? useSelector((state: any) => state.auth?.user?.isLoggedin) : true
-
-    // const { vertical } = useSelector((state: any) => {
-    //     return {
-    //         vertical: state.app?.vertical
-    //     }
-    // }, shallowEqual)
-
-    // const lastLoadedVertical = useRef<string | null>(null)
-
-    // useEffect(() => {
-    //     if (!isLoggedin || !vertical) return
-    //     if (lastLoadedVertical.current === vertical) return
-    
-    //     loadVertical(vertical)
-    //     lastLoadedVertical.current = vertical
-    
-    // }, [isLoggedin, loadVertical, vertical])
 
     return (
         <Suspense fallback={<p>Loading Vertical...</p>}>

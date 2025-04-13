@@ -14,6 +14,7 @@ import QuickUserToggle from "./header/toolbar/QuickUserToggle"
 import SignOut from "./header/toolbar/SignOut"
 import VerticalSelection from "./header/toolbar/VerticalSelection"
 import CustomisableUiSwitch from "./header/toolbar/CustomisableUiSwitch"
+import InfoPopupPeopleAndAssets from "./info-popups/InfoPopupPeopleAndAssets"
 
 export default {
     GeneralAttendanceTable,
@@ -30,4 +31,5 @@ export default {
     SignOut,
     VerticalSelection,
     CustomisableUiSwitch,
+    InfoPopupPeopleAndAssets,
 }

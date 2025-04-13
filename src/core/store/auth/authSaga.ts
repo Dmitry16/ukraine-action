@@ -4,36 +4,23 @@ import { put, takeLatest, call } from "redux-saga/effects"
 import { auth } from "../../services/db/firebase"
 import { login as authLogin, getCurrentUser, getUserClaims, getUserPermissions, TenantResult, MultiTenantResult } from "../../services/auth/AuthService"
 import { appSignIn, login, logout, register, userLoaded, setUserClaims, setUserPermissions } from "./authSlice"
+import { cons } from "effect/List"
+import { an } from "node_modules/framer-motion/dist/types.d-B50aGbjN"
 
 
 export function* loginSaga(action: any) {
-  // these are the actions that should be dispatched from the login component
-  // const { setSnackBarOpen, setLoading, setCustomerSelection, dispatch } = action.payload
   try {
-      // setLoading(true)
-      // console.log("loginSaga:::action:::", action)
-
-      // authLogin(action.payload.email, action.payload.password, action.payload.tenantID)
       yield authLogin(action.payload.email, action.payload.password)
         .then((response: any) => {
-          // setLoading(false)
-
-          // console.log("loginSaga:::response:::", response)
-  
           if (!response) {
             console.error("Login failed: No response received")
             return
           }
-  
-          // if (isMultiTenantResult(response)) {
-          //   const customers = response.customers.map(val =>
-          //     val.tenantID ? val : { ...val, tenantID: "superAdmin" }
-          //   )
-          //   setCustomerSelection(customers)
-          //   return
-          // }
-  
-          // If not a multi-tenant result, assume it's a regular User
+
+          // const idToken = response.user.getIdToken();
+
+          console.log("LoginSaga::::response:::", response)
+
           put(login({ authToken: response.uid }))
         })
         .catch(error => {
@@ -57,11 +44,35 @@ export function* logoutSaga() {
   }
 }
 
+async function fetchUserProfile(user: any): Promise<any> {
+  if (!user) {
+    return null
+  }
+  try {
+    const response = await fetch('http://localhost:3000/users/getUserProfile', {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${user?.stsTokenManager?.accessToken}`,
+      },
+    })
+    const data = await response.json()
+
+    // console.log("fetchUserProfile::::data:::", data)
+
+    return data
+  } catch (error) {
+    console.error('Error fetching user metadata:', error)
+    return null
+  }
+}
+
 export function* userRequestedSaga(): Generator {
   try {
     const user: User | null = yield call(getCurrentUser)
 
-    // console.log("userRequestedSaga::::user:::", user) 
+    const userProfile = yield call(fetchUserProfile, user)
+
+    console.log("userRequestedSaga::::userProfile:::", userProfile) 
 
     if (!user) {
       yield put(userLoaded(null))
@@ -69,7 +80,7 @@ export function* userRequestedSaga(): Generator {
     }
 
     const userData = {
-      username: user.displayName ?? null,
+      name: userProfile.name ?? null,
       email: user.email ?? null,
       phone: user.phoneNumber ?? null,
       pic: user.photoURL ?? null,

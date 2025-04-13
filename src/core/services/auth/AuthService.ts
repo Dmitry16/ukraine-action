@@ -38,62 +38,7 @@ export async function login(
     _tenantID: string | null = null
 ): Promise<LoginResponse> {
     if (!email || !password) return null
-  
-    // const domain = email.substring(email.lastIndexOf("@") + 1)
-    // let tenantID = _tenantID
-  
-    // const loginDataRef = collection(getFirestore(), "LoginData")
-
-    // // console.log("AuthService:::login -> loginDataRef::::", loginDataRef)
-    // // console.log("AuthService:::login -> domain::::", domain)
-  
-    // let querySnapshot: QuerySnapshot | undefined
-  
-    // if (!tenantID) {
-    //   querySnapshot = await getDocs(
-    //     query(
-    //       loginDataRef,
-    //       where("domain", "==", domain),
-    //       where("customerType", "==", "ua")
-    //     )
-    //   )
-    // }
-
-    // // console.log("AuthService:::login -> querySnapshot::::", querySnapshot)
-  
-    // if (querySnapshot?.docs.length && querySnapshot.docs.length > 1) {
-    //   const results = (
-    //     await Promise.all(
-    //       querySnapshot.docs.map(async val => {
-    //         const tenant = val.data().tenantID
-    //         auth.tenantId = tenant
-  
-    //         try {
-    //           const signInMethods = await fetchSignInMethodsForEmail(auth, email)
-    //           return signInMethods.length > 0 ? { tenantID: tenant, customerName: val.data().customerName } : null
-    //         } catch (error) {
-    //           console.error("Error fetching sign-in methods:", error)
-    //           return null
-    //         }
-    //       })
-    //     )
-    //   ).filter(Boolean) as TenantResult[]
-
-    //   console.log("AuthService:::login -> results::::", results)
-  
-    //   if (results.length > 1) {
-    //     return { multipleTenants: true, customers: results }
-    //   }
-  
-    //   tenantID = results[0].tenantID
-    // }
-  
-    // if (querySnapshot?.docs.length === 1) {
-    //   tenantID = querySnapshot.docs[0].data().tenantID
-    // }
-  
-    // auth.tenantId = tenantID === "superAdmin" ? null : tenantID
-  
+    
     try {
       const userCredential: UserCredential = await signInWithEmailAndPassword(auth, email, password)
       // console.log("AuthService:::login -> userCredential::::", userCredential)

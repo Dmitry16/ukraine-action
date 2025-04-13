@@ -37,13 +37,20 @@ export const defaultConfig = {
                 Widget6: { id: "widget6", widget: "Widget6", isEnabled: true, components: [] }
             },
             generalAttendanceFeature: {
-                GeneralAttendanceTableWidget: {
+                UserInfoWidget: {
                     id: "widget1",
                     isEnabled: true,
                     components: [
-                        { id: "GeneralAttendanceTableId", name: "GeneralAttendanceTable" },
+                        { id: "componentId", name: "InfoPopupPeopleAndAssets" },
                     ]
                 },
+                // GeneralAttendanceTableWidget: {
+                //     id: "widget1",
+                //     isEnabled: true,
+                //     components: [
+                //         { id: "GeneralAttendanceTableId", name: "GeneralAttendanceTable" },
+                //     ]
+                // },
                 SampleWidget2: { id: "widget1", widget: "SampleWidget2", isEnabled: true, components: [] }
             },
             liveMap: {
